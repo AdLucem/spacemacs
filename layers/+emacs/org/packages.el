@@ -27,7 +27,7 @@
     org-mime
     org-pomodoro
     org-present
-    (org-projectile :toggle (configuration-layer/package-usedp 'projectile))
+;;    (org-projectile :toggle (configuration-layer/package-usedp 'projectile))
     (ox-twbs :toggle org-enable-bootstrap-support)
     ;; use a for of ox-gfm to fix index generation
     (ox-gfm :location (recipe :fetcher github :repo "syl20bnr/ox-gfm")
@@ -504,26 +504,7 @@ Headline^^            Visit entry^^               Filter^^                    Da
       (add-hook 'org-present-mode-hook 'spacemacs//org-present-start)
       (add-hook 'org-present-mode-quit-hook 'spacemacs//org-present-end))))
 
-(defun org/init-org-projectile ()
-  (use-package org-projectile
-    :commands (org-projectile:location-for-project)
-    :init
-    (progn
-      (spacemacs/set-leader-keys
-        "aop" 'org-projectile/capture
-        "po" 'org-projectile/goto-todos)
-      (with-eval-after-load 'org-capture
-        (require 'org-projectile)))
-    :config
-    (if (file-name-absolute-p org-projectile-file)
-        (progn
-          (setq org-projectile:projects-file org-projectile-file)
-          (push (org-projectile:project-todo-entry
-                 nil nil nil :empty-lines 1)
-                org-capture-templates))
-      (org-projectile:per-repo)
-      (setq org-projectile:per-repo-filename org-projectile-file))))
-
+;; removed init for org-projectile
 (defun org/init-ox-twbs ()
   (spacemacs|use-package-add-hook org :post-config (require 'ox-twbs)))
 
